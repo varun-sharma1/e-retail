@@ -1,5 +1,4 @@
-"""Order app module docstring
-
+"""
 Author: Varun
 """
 
