@@ -9,9 +9,8 @@ import { isAuthenticated, signout } from "../auth/helper";
 
 import DropIn from "braintree-web-drop-in-react";
 
+// payment component for Braintree
 const PaymentB = (products, reload = false, setReload = (f) => f) => {
-  // payment component for Braintree
-
   const [info, setInfo] = useState({
     loading: false,
     success: false,
@@ -31,9 +30,8 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
 
   products = JSON.parse(localStorage.getItem("cart"));
 
+  // get the token from the frontend.
   const getToken = (userId, token) => {
-    // get the token from the frontend.
-
     // fetch the token from the user.
     getMeToken(userId, token).then((info) => {
       if (info.error) {
@@ -55,9 +53,8 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
     getToken(userId, token);
   }, [userId, token]);
 
+  // function to be executed when the purchase button is clicked.
   const onPurchase = () => {
-    // function to be executed when the purchase button is clicked.
-
     setInfo({ loading: true });
     let nonce;
 
@@ -121,9 +118,8 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
     });
   };
 
+  // message to display when order was successfully created.
   const successMessage = () => {
-    // message to display when order was successfully created.
-
     return (
       <div className="row">
         <div className="col-md-6 offset-sm-3 text-left">
@@ -148,9 +144,8 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
     </button>
   );
 
+  // web dropin for braintree
   const showbtnDropIn = () => {
-    // web dropin for braintree
-
     return (
       <div>
         {info.clientToken !== null && products.length > 0 ? (
