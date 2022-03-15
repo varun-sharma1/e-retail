@@ -84,6 +84,25 @@ def add(request, id, token):
         })
 
 
+@csrf_exempt
+def get_orders(request, id, token):
+    """GET orders by a user
+
+    id: user id
+    token: authentication token
+    """
+
+    if request.method != 'GET':
+        return {'message': 'Error. Please use get method'}
+
+    if not validate_user_session(id, token):
+        return {'error': 'Please login again.'}
+
+    query = Order.objects.filter(user_id=id)
+    orders_list = list(query.values())
+
+    return JsonResponse({'orders': orders_list}, safe=False)
+
 class OrderViewSet(viewsets.ModelViewSet):
     """Order viewset"""
 
