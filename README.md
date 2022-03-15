@@ -12,25 +12,25 @@ Database - Postgresql (v13)
 
 The project folders are divided into three sections namely:
 
-- ecart-frontend
-- ecart-backend
+- e-retail-frontend
+- e-retail-backend
 - docs
 
 As the name suggests, the respective folders contain the relevant frontend and backend code files.
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install ecart-backend using the requirements.txt file in the backend folder. Traverse into the ecart-backend folder and use the following command to install the backend:
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install e-retail-backend using the requirements.txt file in the backend folder. Traverse into the e-retail-backend folder and use the following command to install the backend:
 
 ```terminal
 pip install -r requirements.txt
 ```
 
-Once the installation is done, traverse into the ecart folder inside ecart-backend and run the backend application using the following command:
+Once the installation is done, traverse into the e-retail folder inside e-retail-backend and run the backend application using the following command:
 
 ```terminal
 python manage.py runserver
 ```
 
-Use the package manager [npm](https://www.npmjs.com/) to install ecart-frontend using the requirements.txt file in the backend folder. Traverse into the ecart-frontend folder and use the following command to install the backend:
+Use the package manager [npm](https://www.npmjs.com/) to install e-retail-frontend using the requirements.txt file in the backend folder. Traverse into the e-retail-frontend folder and use the following command to install the backend:
 
 ```terminal
 npm install
