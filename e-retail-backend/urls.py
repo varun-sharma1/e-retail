@@ -15,5 +15,7 @@ router.register(r'', views.OrderViewSet)
 
 urlpatterns = [
     path('add/<str:id>/<str:token>/', views.add, name='order.add'),
+    path('order_history/<str:id>/<str:token>/',
+         views.get_orders, name='orders.get_orders'),
     path('', include(router.urls)),
 ]
