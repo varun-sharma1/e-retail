@@ -1,5 +1,4 @@
-"""Order app module docstring
-
+"""
 Author: Varun
 """
 import json
@@ -9,15 +8,14 @@ from rest_framework import viewsets
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
+from http import HTTPStatus
 
 from .serializers import OrderSerializer
 from .models import Order
 
-# Create your views here.
-
 
 def validate_user_session(id, token):
-    """validates theuser session
+    """validates the user session
 
     id: id of user.
     token: session token.
@@ -34,9 +32,10 @@ def validate_user_session(id, token):
 
 
 def get_total_products(products):
-    """extract total products from the argument
+    """
+    counts the number of products in an order.
 
-    products: list of all the products in the order
+    products: list of all the products in the cart
     """
 
     total_count = 0
@@ -49,7 +48,11 @@ def get_total_products(products):
 
 @csrf_exempt
 def add(request, id, token):
-    """Add order to db"""
+    """Adds order to db
+
+    id: user id
+    token: authentication token
+    """
     if not validate_user_session(id, token):
         return {'error': 'Please login again.'}
 
@@ -58,8 +61,6 @@ def add(request, id, token):
         amount = request.POST['amount']
         products = request.POST['products']
 
-        # to be fixed. Calculate based on new string value
-        # total_pro = len(products.split(',')[:-1])
         total_pro = get_total_products(products)
 
         user_model = get_user_model()
@@ -79,7 +80,7 @@ def add(request, id, token):
             'success': True,
             'error': 'False',
             'msg': 'order placed successfully.'
-        })
+        }, status=HTTPStatus.CREATED)
 
 
 @csrf_exempt
@@ -89,6 +90,7 @@ def get_orders(request, id, token):
     id: user id
     token: authentication token
     """
+
     if request.method != 'GET':
         return {'message': 'Error. Please use get method'}
 
@@ -97,7 +99,8 @@ def get_orders(request, id, token):
 
     query = Order.objects.filter(user_id=id)
     orders_list = list(query.values())
-    return JsonResponse({'orders': orders_list}, safe=False)
+
+    return JsonResponse({'orders': orders_list}, safe=False, status=HTTPStatus.OK)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
