@@ -29,10 +29,10 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
   }
 
   products = JSON.parse(localStorage.getItem("cart"));
-  console.log("PAYMENTB, line 32: CART:", products);
 
   const getToken = (userId, token) => {
     // get the token from the frontend.
+
     getMeToken(userId, token).then((info) => {
       if (info.error) {
         setInfo({
@@ -55,8 +55,10 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
 
   const onPurchase = () => {
     // function to be executed when the purchase button is clicked.
+
     setInfo({ loading: true });
     let nonce;
+
     info.instance.requestPaymentMethod().then((data) => {
       nonce = data.nonce;
       const paymentData = {
