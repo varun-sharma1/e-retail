@@ -12,9 +12,8 @@ import { totalItemsInCart } from "./helper/cartHelper";
 
 import classes from "./styles/Home.module.css";
 
-function Home() {
-  // Homepage component
-
+// Homepage component
+const Home = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
   const [currentCount, setCount] = useState(totalItemsInCart());
@@ -22,9 +21,8 @@ function Home() {
   const [searchProduct, setSearchedProduct] = useState("");
   const [addToCartSwitch, setAddToCartSwitch] = useState(false);
 
+  // load all the products sent from the backend.
   const loadAllProducts = () => {
-    // load all the products sent from the backend.
-
     getProducts().then((data) => {
       if (data.error) {
         setError(data.error);
@@ -86,6 +84,6 @@ function Home() {
       </Base>
     </MainNavigation>
   );
-}
+};
 
 export default Home;
