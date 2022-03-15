@@ -2,14 +2,8 @@ import { API } from "../../backend";
 
 import { cartEmpty } from "../../core/helper/cartHelper";
 
+// function handling signup Makes POST request to the API.
 export const signup = (user) => {
-  /** function handling signup Makes POST request to the API.
-   *
-   * parameters:
-   * user (object): Data assocaited with the user.
-   *
-   */
-
   return fetch(`${API}user/`, {
     method: "POST",
     headers: {
@@ -24,14 +18,8 @@ export const signup = (user) => {
     .catch((err) => console.log(err));
 };
 
+// function handling signin. Makes POST request to the API.
 export const signin = (user) => {
-  /** function handling signin. Makes POST request to the API.
-   *
-   * parameters:
-   * user (object): Data assocaited with the user.
-   *
-   */
-
   const formData = new FormData();
 
   for (const name in user) {
@@ -48,23 +36,16 @@ export const signin = (user) => {
     .catch((err) => console.log(err));
 };
 
+// authenticates the user. Sets session token in local storage.
 export const authenticate = (data, next) => {
-  /** authenticates the user. Sets session token in local storage.
-   *
-   * parameters:
-   * data: the data to signin with or signup with
-   * next: any
-   */
-
   if (typeof window !== undefined) {
     localStorage.setItem("token", JSON.stringify(data));
     next();
   }
 };
 
+// check if a user is authenticated or not.
 export const isAuthenticated = () => {
-  // check if a user is authenticated or not.
-
   if (typeof window == undefined) {
     return false;
   }
@@ -75,14 +56,8 @@ export const isAuthenticated = () => {
   }
 };
 
+// sign out a user
 export const signout = (next) => {
-  /**
-   * Sign a user out.
-   *
-   * parameters:
-   * next: any
-   */
-
   const userId = isAuthenticated() && isAuthenticated().user.id;
 
   if (typeof window !== undefined) {
