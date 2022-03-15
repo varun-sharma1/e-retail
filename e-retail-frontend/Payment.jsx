@@ -24,6 +24,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
 
   const userId = isAuthenticated() && isAuthenticated().user.id;
   let token;
+
   if (isAuthenticated()) {
     token = JSON.parse(localStorage.getItem("token")).token.toString();
   }
@@ -33,6 +34,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
   const getToken = (userId, token) => {
     // get the token from the frontend.
 
+    // fetch the token from the user.
     getMeToken(userId, token).then((info) => {
       if (info.error) {
         setInfo({
@@ -66,6 +68,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
         amount: totalCost(),
       };
 
+      // process the payment input by user.
       processPayment(userId, token, paymentData)
         .then((response) => {
           if (response.error) {
@@ -76,6 +79,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
             }
           } else {
             setInfo({ ...info, success: response.success, loading: true });
+
             setOrderSuccess(true);
 
             let product_names = JSON.stringify(products);
@@ -86,6 +90,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
               amount: response.transaction.amount,
             };
 
+            // create a new order.
             createOrder(userId, token, orderData)
               .then((response) => {
                 if (response.error) {
@@ -145,6 +150,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
 
   const showbtnDropIn = () => {
     // web dropin for braintree
+
     return (
       <div>
         {info.clientToken !== null && products.length > 0 ? (
