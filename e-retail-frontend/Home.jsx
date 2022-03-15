@@ -41,6 +41,23 @@ function Home() {
 
   let productsToDisplay = products;
 
+  if (selectedCategory === "All") {
+    productsToDisplay = products;
+  } else {
+    productsToDisplay = products.filter((product) => {
+      return (
+        product.category.slice(-2)[0].toString() === selectedCategory.toString()
+      );
+    });
+  }
+
+  // condition to filter products
+  if (searchProduct !== "") {
+    productsToDisplay = productsToDisplay.filter((product) => {
+      return product.name.toLowerCase().includes(searchProduct.toLowerCase());
+    });
+  }
+
   return (
     <MainNavigation
       cartCount={currentCount}
