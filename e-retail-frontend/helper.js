@@ -74,3 +74,29 @@ export const isAuthenticated = () => {
     return false;
   }
 };
+
+export const signout = (next) => {
+  /**
+   * Sign a user out.
+   *
+   * parameters:
+   * next: any
+   */
+
+  const userId = isAuthenticated() && isAuthenticated().user.id;
+
+  if (typeof window !== undefined) {
+    localStorage.removeItem("name");
+    localStorage.removeItem("token");
+    cartEmpty(() => {});
+    next();
+
+    return fetch(`${API}user/logout/${userId}`, {
+      mathod: "GET",
+    })
+      .then((response) => {
+        next();
+      })
+      .catch((err) => console.log(err));
+  }
+};
