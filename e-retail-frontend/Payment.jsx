@@ -69,7 +69,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
       processPayment(userId, token, paymentData)
         .then((response) => {
           if (response.error) {
-            if (response.code === "1") {
+            if (response.code === "200") {
               signout(() => {
                 return <Redirect to="/" />;
               });
@@ -91,7 +91,7 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
             createOrder(userId, token, orderData)
               .then((response) => {
                 if (response.error) {
-                  if (response.code === "1") {
+                  if (response.code === "200") {
                     signout(() => {
                       return <Redirect to="/" />;
                     });
