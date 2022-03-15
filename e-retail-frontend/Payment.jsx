@@ -79,10 +79,10 @@ const PaymentB = (products, reload = false, setReload = (f) => f) => {
 
             setOrderSuccess(true);
 
-            let product_names = JSON.stringify(products);
+            let productNames = JSON.stringify(products);
 
             const orderData = {
-              products: product_names,
+              products: productNames,
               transaction_id: response.transaction.id,
               amount: response.transaction.amount,
             };
