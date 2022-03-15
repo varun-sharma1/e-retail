@@ -9,6 +9,7 @@ import { signup } from "../auth/helper/index";
 
 import classes from "./styles/Signup.module.css";
 
+// sign up component for our app
 const Signup = () => {
   const [values, setValues] = useState({
     name: "",

@@ -5,8 +5,8 @@ import PageFooter from "../core/PageFooter";
 
 import classes from "./styles/Profile.module.css";
 
+// profile page
 const Profile = () => {
-  // profile page
   return (
     <MainNavigation>
       <div className={classes.profileBody}>

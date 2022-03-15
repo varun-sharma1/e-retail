@@ -8,6 +8,7 @@ import PageFooter from "../core/PageFooter";
 
 import classes from "./styles/Signin.module.css";
 
+// Sign in component for our app
 const Signin = () => {
   const [values, setValues] = useState({
     name: "",
@@ -21,8 +22,8 @@ const Signin = () => {
 
   const { email, password, error, success, loading } = values;
 
+  // set values on change in values
   const handleChange = (name) => (event) => {
-    // set values on change in values
     setValues({
       ...values,
       name: name,
@@ -32,12 +33,13 @@ const Signin = () => {
   };
 
   var nameVal;
-  const onSubmit = (event) => {
-    //handle sumbit event on submitting the signin form.
 
+  //handle sumbit event on submitting the signin form.
+  const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
 
+    // try signing the user in
     signin({ email, password })
       .then((data) => {
         if (data.token) {
@@ -62,16 +64,15 @@ const Signin = () => {
       });
   };
 
+  // perform the redirect to the homepage.
   const performRedirect = () => {
-    // perform the redirect to the homepage.
     if (isAuthenticated()) {
       return <Redirect to={{ pathname: "/", state: values }} />;
     }
   };
 
+  // message to show when processing request.
   const loadingMessage = () => {
-    // message to show when processing request.
-
     return (
       loading && (
         <div className="alert alert-info">
@@ -81,9 +82,8 @@ const Signin = () => {
     );
   };
 
+  // message to display when login credentials are fine.
   const successMessage = () => {
-    // message to display when login credentials are fine.
-
     return (
       <div className="row">
         <div className="col-md-6 offset-sm-3 text-left">
@@ -99,8 +99,8 @@ const Signin = () => {
     );
   };
 
+  // message to display when login is not successful.
   const errorMessage = () => {
-    // message to display when login is not successful.
     return (
       <div className="row">
         <div className="col-md-6 offset-sm-3 text-left">
@@ -115,8 +115,8 @@ const Signin = () => {
     );
   };
 
+  // the actual sign in form
   const signInForm = () => {
-    // the actual sign in form
     return (
       <div className={classes.signinForm}>
         <form>
