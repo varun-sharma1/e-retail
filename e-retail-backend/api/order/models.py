@@ -1,5 +1,4 @@
-"""Order app module docstring
-
+"""
 Author: Varun
 """
 
@@ -10,6 +9,7 @@ from api.user.models import CustomUser
 
 class Order(models.Model):
     """Database model for Order app."""
+
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=True, blank=True
     )
