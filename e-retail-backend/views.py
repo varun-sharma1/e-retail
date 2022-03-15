@@ -60,8 +60,6 @@ def add(request, id, token):
         amount = request.POST['amount']
         products = request.POST['products']
 
-        # to be fixed. Calculate based on new string value
-        # total_pro = len(products.split(',')[:-1])
         total_pro = get_total_products(products)
 
         user_model = get_user_model()
@@ -102,6 +100,7 @@ def get_orders(request, id, token):
     orders_list = list(query.values())
 
     return JsonResponse({'orders': orders_list}, safe=False)
+
 
 class OrderViewSet(viewsets.ModelViewSet):
     """Order viewset"""
