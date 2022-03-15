@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
+from http import HTTPStatus
 
 from .serializers import OrderSerializer
 from .models import Order
@@ -79,7 +80,7 @@ def add(request, id, token):
             'success': True,
             'error': 'False',
             'msg': 'order placed successfully.'
-        })
+        }, status=HTTPStatus.CREATED)
 
 
 @csrf_exempt
@@ -99,7 +100,7 @@ def get_orders(request, id, token):
     query = Order.objects.filter(user_id=id)
     orders_list = list(query.values())
 
-    return JsonResponse({'orders': orders_list}, safe=False)
+    return JsonResponse({'orders': orders_list}, safe=False, status=HTTPStatus.OK)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
