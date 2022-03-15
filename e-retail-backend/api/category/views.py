@@ -1,5 +1,6 @@
 """Category viewset file"""
 
+from http import HTTPStatus
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
@@ -21,4 +22,4 @@ def get_all_categories(request):
 
     query = Category.objects.all().order_by('name')
     categories_list = list(query.values())
-    return JsonResponse(categories_list, safe=False)
+    return JsonResponse(categories_list, safe=False, status=HTTPStatus.OK)
